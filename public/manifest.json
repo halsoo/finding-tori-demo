@@ -1,0 +1,15 @@
+{
+  "short_name": "Finding Tori",
+  "name": "Finding Tori Demo",
+  "icons": [
+    {
+      "src": "./icons/favicon-16.png",
+      "type": "image/png",
+      "sizes": "16x16"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#5270b5",
+  "background_color": "#ffffff"
+}
