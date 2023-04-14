@@ -593,6 +593,38 @@ label {
   --tw-backdrop-sepia:  ;
 }
 
+.tag text{
+  visibility: hidden;
+}
+
+.tag:hover text{
+  visibility: visible;
+}
+
+.mb-\[50px\]{
+  margin-bottom: 50px;
+}
+
+.flex{
+  display: flex;
+}
+
+.transform{
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.flex-col{
+  flex-direction: column;
+}
+
+.items-center{
+  align-items: center;
+}
+
+.justify-center{
+  justify-content: center;
+}
+
 .text-5xl{
   font-size: 96px;
 }

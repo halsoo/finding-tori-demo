@@ -101,4 +101,11 @@
     .minor {
         @apply font-sub text-minor font-normal text-black;
     }
+
+    .tag text {
+        @apply invisible
+    }
+    .tag:hover text {
+        @apply visible
+    }
 }
