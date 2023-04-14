@@ -593,6 +593,10 @@ label {
   --tw-backdrop-sepia:  ;
 }
 
+.tag{
+  cursor: pointer;
+}
+
 .tag text{
   visibility: hidden;
 }
