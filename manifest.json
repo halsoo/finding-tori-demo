@@ -1,0 +1,9 @@
+{
+  "short_name": "Finding Tori",
+  "name": "Finding Tori Demo",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#5270b5",
+  "background_color": "#ffffff"
+}
