@@ -105,11 +105,4 @@
     .tag {
         @apply cursor-pointer
     }
-
-    .tag text {
-        @apply invisible
-    }
-    .tag:hover text {
-        @apply visible
-    }
 }

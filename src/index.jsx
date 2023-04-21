@@ -1,7 +1,7 @@
 import React from "react"
 import { createRoot } from "react-dom/client"
 
-import PCAPlot from './components/PCAPlot'
+import ToriPlot from './components/ToriPlot'
 
 import './styles/index.css'
 
@@ -12,7 +12,7 @@ function App() {
                 {`Finding Tori`}
             </p>
 
-            <PCAPlot/>
+            <ToriPlot/>
         </div>
     )
 }
