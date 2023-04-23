@@ -5,10 +5,19 @@ import { v4 as uuid } from 'uuid'
 import SVGWrapper from "../SVGWrapper"
 import Tooltip from '../Tooltip'
 
-import { scale, makeScaler, hslToHex, getMinMaxFromObj as getMinMax, tori2Color } from '../../scripts'
+import { 
+    scale, 
+    makeScaler, 
+    getMinMaxFromObj as getMinMax, 
+    tori2Color, 
+    ter2Region, 
+    capStr, 
+    key2Label 
+} from '../../scripts'
 import data from '../../data/metadata.json'
 
-function ToriPlot({className}) {
+function ToriPlot({ className }) {
+
     const containerRef = useRef()
     const svgRef = useRef()
     const tooltipRef = useRef({})
@@ -22,12 +31,18 @@ function ToriPlot({className}) {
     const [yCorMin, yCorMax] = getMinMax(data, 'umap_y')
 
     const margin = 30
+    const defaultR = 80
+    const focusScale = 1.5
 
     const onElemClick = (e, d) => {
         window.open(d.download_link, '_blank')
     }
 
     const onElemOver = (e, d) => {
+        const curTarget = d3.select(e.target)
+        const curTargetR = curTarget.attr('r')
+        curTarget.attr('r', curTargetR * focusScale)
+
         const tooltipItemKeys = Object.keys(tooltipRef.current)
 
         tooltipItemKeys.forEach(key => {
@@ -45,14 +60,35 @@ function ToriPlot({className}) {
                 return
             }
 
-            const descVal = d[key]
-            const descElem = d3.select(elem.node().childNodes[1])
-            descElem.text(descVal === false ? 'none' : descVal)
+            let descVal = d[key]
+            descVal = (
+                descVal === false
+                    ? 'none'
+                : descVal === ''
+                    ? '?'
+                : key === 'ter'
+                    ? ter2Region[descVal]
+                : key === 'det_ter' || key === 'is_tori'
+                    ? capStr(descVal)
+                : descVal
+            )
 
+            const descElem = d3.select(elem.node().childNodes[1])
+
+            if(descVal === 'none') elem.classed('hidden', true)
+            else elem.classed('hidden', false)
+
+            if(key === 'is_tori') descElem.style('font-weight', 'bold')
+
+            descElem.text(descVal)
         })
     }
 
     const onElemOut = (e, d) => {
+        const curTarget = d3.select(e.target)
+        const curTargetR = curTarget.attr('r')
+        curTarget.attr('r', curTargetR * (1/focusScale) )
+
         const tooltipElem= tooltipRef.current.main
         d3.select(tooltipElem)
         .classed('hidden', true)
@@ -102,31 +138,22 @@ function ToriPlot({className}) {
             .attr('cy', d => yScaler(d.umap_y))
             .attr('fill', d => tori2Color[d.is_tori])
             .attr('fill-opacity', "40%")
-            .attr('r', 80)
 
         toriGs
         .append('circle')
             .attr('cx', d => xScaler(d.umap_x))
             .attr('cy', d => yScaler(d.umap_y))
             .attr('fill', d => tori2Color[d.is_tori])
-            .attr('r', 80)
 
         const zoom = d3.zoom()
 
         zoom.on('zoom', e => {
             const curDelta = e.transform.k
-
-            // console.log(curScale)
-            const curR = curDelta < 0.4 ? 80 : 20/(curDelta * 0.8);
+            const curR = curDelta < 0.4 ? defaultR : 20/(curDelta * 0.8);
 
             mainG
             .selectAll('circle')
             .attr('r', curR)
-            .attr('stroke-width', 1/curDelta)
-
-            // subGs
-            // .selectAll('text')
-            // .style('font-size', `calc(30px/${curDelta})`)
 
             mainG.attr('transform', e.transform)
         })
@@ -152,10 +179,11 @@ function ToriPlot({className}) {
                 assignRef={assignRef('main')}
             >
                 {[
-                    'title',
+                    'is_tori',
+                    'id',
+                    'korean_info',
                     'ter',
                     'det_ter',
-                    'is_tori',
                     'singer',
                     'rec_date',
                     'length',
@@ -163,7 +191,7 @@ function ToriPlot({className}) {
                     return (
                         <Tooltip.Item
                             item={{
-                                label: key,
+                                label: key2Label(key),
                                 unit: key === 'length' ? 'sec' : ''
                             }}
                             assignRef={assignRef(key)}

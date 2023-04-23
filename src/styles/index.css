@@ -609,10 +609,6 @@ label {
   }
 }
 
-.invisible{
-  visibility: hidden;
-}
-
 .absolute{
   position: absolute;
 }
@@ -645,10 +641,6 @@ label {
   height: 100%;
 }
 
-.w-\[80vw\]{
-  width: 80vw;
-}
-
 .w-full{
   width: 100%;
 }
@@ -669,22 +661,9 @@ label {
   justify-content: center;
 }
 
-.bg-white{
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
 .bg-grey-light{
   --tw-bg-opacity: 1;
   background-color: rgb(235 235 235 / var(--tw-bg-opacity));
-}
-
-.bg-opacity-10{
-  --tw-bg-opacity: 0.1;
-}
-
-.bg-opacity-30{
-  --tw-bg-opacity: 0.3;
 }
 
 .bg-opacity-60{
@@ -693,10 +672,6 @@ label {
 
 .p-10{
   padding: 10px;
-}
-
-.pt-55\%{
-  padding-top: 55%;
 }
 
 .text-5xl{

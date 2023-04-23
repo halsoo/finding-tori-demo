@@ -4,20 +4,6 @@ const scale = (number, inMin, inMax, outMin, outMax) => {
 
 const makeScaler = (inMin, inMax, outMin, outMax) => (number) => scale(number, inMin, inMax, outMin, outMax)
 
-const hslToHex = (h, s, l) => {
-    l /= 100
-
-    const a = s * Math.min(l, 1 - l) / 100
-
-    const f = n => {
-        const k = (n + h / 30) % 12
-        const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1)
-        return Math.round(255 * color).toString(16).padStart(2, '0')   // convert to Hex and prefix "0" if needed
-    }
-
-    return `#${f(0)}${f(8)}${f(4)}`
-}
-
 const getMinMaxFromObj = (objList, key) => {
     const keyArr = objList.map( obj => obj[key] )
     const max = Math.max(...keyArr)
@@ -34,5 +20,29 @@ const tori2Color = {
     'others': '#82bd60', // Forest Green
 }
 
+const ter2Region = {
+    'gg': 'Gyeonggi-do',
+    'gw': 'Gangwon-do',
+    'cb': 'Chungcheongbuk-do',
+    'cn': 'Chungcheongnam-do',
+    'jb': 'Jeollabuk-do',
+    'jn': 'Jeollanam-do',
+    'gb': 'Gyeongsangbuk-do',
+    'gn': 'Gyeonsangnam-do',
+    'jj': 'Jeju',
+}
 
-export { scale, makeScaler, hslToHex, getMinMaxFromObj, tori2Color }
+const capStr = str => str.substring(0, 1).toUpperCase() + str.substring(1)
+
+const key2Label = key => (
+    key === 'ter'
+        ? 'region'
+    : key == 'det_ter'
+        ? 'sub-region'
+    : key === 'is_tori'
+        ? 'tori'
+    : key
+)
+
+
+export { scale, makeScaler, getMinMaxFromObj, tori2Color, ter2Region, capStr, key2Label }
