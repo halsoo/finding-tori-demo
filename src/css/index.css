@@ -71,35 +71,8 @@
 }
 
 @layer components {
-    .H1 {
-        @apply font-display text-H1 font-medium text-black;
-    }
     .H2 {
-        @apply font-display text-H2 font-medium text-black;
-    }
-    .H3 {
-        @apply font-display text-H3 font-medium text-black;
-    }
-    .H3R {
-        @apply font-display text-H3 font-normal text-black;
-    }
-    .H4 {
-        @apply font-display text-H4 font-medium text-black;
-    }
-    .H4R {
-        @apply font-display text-H4 font-normal text-black;
-    }
-    .Subtitle {
-        @apply font-sub text-subtitle font-normal text-black;
-    }
-    .Body24 {
-        @apply font-sub text-subtitle font-normal text-black leading-[32px];
-    }
-    .body {
-        @apply font-sub text-body font-normal text-black leading-[21px];
-    }
-    .minor {
-        @apply font-sub text-minor font-normal text-black;
+        @apply text-letter-mid text-2xl font-bold
     }
 
     .tag {

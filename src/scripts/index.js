@@ -13,11 +13,11 @@ const getMinMaxFromObj = (objList, key) => {
 }
 
 const tori2Color = {
-    false: '#adadad', // Misty Rose
-    'gyung': '#dd605b', // Electric Blue
-    'menari': '#e6a850', // Crimson Red
-    'yukja': '#8c9be7', // Golden Yellow
-    'others': '#82bd60', // Forest Green
+    false: '#adadad',
+    'gyung': '#dd605b', // red
+    'menari': '#e6a850', // yellow
+    'yukja': '#8c9be7', // blue
+    'others': '#82bd60', // green
 }
 
 const ter2Region = {

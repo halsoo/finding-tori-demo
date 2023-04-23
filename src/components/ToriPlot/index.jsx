@@ -169,7 +169,7 @@ function ToriPlot({ className }) {
 
     return (
         <SVGWrapper
-            width='70vw'
+            width='100%'
             heightRatio='55%'
             containerRef={containerRef}
             svgRef={svgRef}
